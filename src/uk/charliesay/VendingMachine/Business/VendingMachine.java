@@ -1,26 +1,47 @@
 package uk.charliesay.VendingMachine.Business;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import uk.charliesay.VendingMachine.Display.ConsoleDisplay;
+import uk.charliesay.VendingMachine.Display.DisplayType;
+import uk.charliesay.VendingMachine.Inventory.ItemMap;
+import uk.charliesay.VendingMachine.Money.MoneyStore;
 
 public class VendingMachine {
 
-    private void serialise() throws IOException {
-        FileOutputStream fout = new FileOutputStream("res/itemList.ser");
-        ObjectOutputStream oos = new ObjectOutputStream(fout);
-        oos.writeObject("Test");
-        fout.close();
-        oos.close();
+    private DisplayType displayType;
+    private MoneyStore moneyStore;
+    private Dispenser dispenser;
+    private ItemMap itemMap;
+
+
+    //Customisable DISPLAY and ITEMS settings
+    public VendingMachine(DisplayType displayType, ItemMap itemMap) {
+        this.displayType = displayType;
+        this.moneyStore = new MoneyStore();
+        this.dispenser = new Dispenser();
+        this.itemMap = itemMap;
     }
 
-    public boolean turnOn(){
-        try{
-            serialise();
-            return true;
-        }catch(IOException e){
-            return false;
-        }
+    //Default Factory Settings
+    public VendingMachine(){
+        this.displayType = new ConsoleDisplay();
+        this.moneyStore = new MoneyStore();
+        this.dispenser = new Dispenser();
+        this.itemMap = new ItemMap();
     }
 
+    public DisplayType getDisplayType() {
+        return displayType;
+    }
+
+    public MoneyStore getMoneyStore() {
+        return moneyStore;
+    }
+
+    public Dispenser getDispenser() {
+        return dispenser;
+    }
+
+    public ItemMap getItemMap() {
+        return itemMap;
+    }
 }
