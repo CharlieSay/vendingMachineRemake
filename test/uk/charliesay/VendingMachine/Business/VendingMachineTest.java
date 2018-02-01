@@ -1,5 +1,6 @@
 package uk.charliesay.VendingMachine.Business;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +19,14 @@ public class VendingMachineTest {
     public void whenTurnOnIsCalled_ShouldReturnTrue(){
         boolean testResult = vendingMachine.turnOn();
 
+        Assert.fail();
         assertTrue(testResult);
+    }
+
+    @Test
+    public void ExceptionCatcher(){
+        boolean testResult = vendingMachine.turnOn();
+        assertTrue(!testResult);
     }
 
 
