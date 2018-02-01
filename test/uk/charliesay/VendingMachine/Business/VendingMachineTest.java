@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class VendingMachineTest {
 
-    VendingMachine vendingMachine;
+    private VendingMachine vendingMachine;
 
     @Before
     public void setUp(){
