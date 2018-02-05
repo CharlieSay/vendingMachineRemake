@@ -44,5 +44,4 @@ public class VendingMachineTest {
         Assert.assertNotNull(dispenser);
         Assert.assertNotNull(itemMap);
     }
-
 }

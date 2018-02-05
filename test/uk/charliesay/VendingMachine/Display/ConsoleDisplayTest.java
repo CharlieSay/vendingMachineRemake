@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
 
 public class ConsoleDisplayTest {
 
@@ -13,6 +13,17 @@ public class ConsoleDisplayTest {
     @Before
     public void setUp(){
         consoleDisplay = new ConsoleDisplay();
+    }
+
+    @Test
+    public void ShouldReturnBreakerLinesOnLineZeroAndThree_RegardlessOfInput(){
+        String testString = "This is a Big Ting";
+        String resultShouldBe = "=========================";
+        String resultString = consoleDisplay.ReadInput(testString);
+        String[] resultStringArray = resultString.split("\n");
+
+        Assert.assertThat(resultStringArray[0],is(resultShouldBe));
+        Assert.assertThat(resultStringArray[2],is(resultShouldBe));
     }
 
     @Test
