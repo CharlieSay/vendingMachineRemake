@@ -13,9 +13,9 @@ public class OledDisplay extends DisplayType implements Detachable {
             }else{
                 throw new InDetachmentException("Something went wrong with screen detach.");
             }
-        }catch (InDetachmentException e){
+        } catch (InDetachmentException e) {
             return ERROR_INDEATCH;
-        }catch (Exception e){
+        } catch (Exception e){
             return UNKNOWN_ERROR;
         }
     }
