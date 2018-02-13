@@ -3,6 +3,7 @@ package uk.charliesay.VendingMachine.Display;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import uk.charliesay.VendingMachine.Exceptions.InDetachmentException;
 
 public class OledDisplayTest {
 
@@ -15,21 +16,18 @@ public class OledDisplayTest {
 
     @Test
     public void should_ReturnStringFormattedWithSymbols_WhenGivenString(){
-        String currentMoney = "Released Cheddars - £1 Left";
+        String testSubject = "Released Cheddars - £1 Left";
         String shouldBe = "><><><><><><><><><><><><><\n"+
-                "> Released Cheddars - £1 Left\n" +
-                "><><><><><><><><><><><><><\n";
+                          "> Released Cheddars - £1 Left\n" +
+                          "><><><><><><><><><><><><><\n";
 
-        String testResult = testOledDisplayObject.ReadInput(currentMoney);
+        String testResult = testOledDisplayObject.ReadInput(testSubject);
 
         Assert.assertEquals(shouldBe,testResult);
     }
 
-    @Test
-    public void should_ReturnDeatchedState_WhenNothingGoesWrong(){
-        DetachableStates detachableStatesShouldBe = DetachableStates.DETACHED;
-        DetachableStates testResult = testOledDisplayObject.detach();
-
-        Assert.assertEquals(detachableStatesShouldBe,testResult);
+    @Test(expected = InDetachmentException.class)
+    public void should_ThrowIDException_WhenWrongDetachCodeIsGiven() throws InDetachmentException {
+        testOledDisplayObject.detachScreen("BooFar");
     }
 }

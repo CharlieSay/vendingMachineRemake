@@ -1,12 +1,7 @@
 package uk.charliesay.VendingMachine.Display;
 
+import uk.charliesay.VendingMachine.Exceptions.InDetachmentException;
+
 public interface Detachable {
-    DetachableStates detach();
-}
-
-
-enum DetachableStates{
-    DETACHED,
-    ERROR_INDEATCH,
-    UNKNOWN_ERROR;
+    boolean detachScreen(String inputDetachCode) throws InDetachmentException;
 }

@@ -8,18 +8,19 @@ import static org.hamcrest.CoreMatchers.is;
 
 public class ConsoleDisplayTest {
 
-    private ConsoleDisplay consoleDisplay;
+    private ConsoleDisplay testConsoleDisplay;
 
     @Before
     public void setUp(){
-        consoleDisplay = new ConsoleDisplay();
+        testConsoleDisplay = new ConsoleDisplay();
     }
 
     @Test
     public void ShouldReturnBreakerLinesOnLineZeroAndThree_RegardlessOfInput(){
         String testString = "This is a Big Ting";
         String resultShouldBe = "=========================";
-        String resultString = consoleDisplay.ReadInput(testString);
+
+        String resultString = testConsoleDisplay.ReadInput(testString);
         String[] resultStringArray = resultString.split("\n");
 
         Assert.assertThat(resultStringArray[0],is(resultShouldBe));
@@ -33,7 +34,7 @@ public class ConsoleDisplayTest {
                                  "Test Object\n" +
                                  "=========================\n";
 
-        String resultString = consoleDisplay.ReadInput(testString);
+        String resultString = testConsoleDisplay.ReadInput(testString);
 
         Assert.assertEquals(endResultString,resultString);
     }
