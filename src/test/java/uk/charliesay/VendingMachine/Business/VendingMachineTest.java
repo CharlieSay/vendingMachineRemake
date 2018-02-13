@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import uk.charliesay.VendingMachine.Display.ConsoleDisplay;
-import uk.charliesay.VendingMachine.Display.DisplayType;
+import uk.charliesay.VendingMachine.Display.Display;
 import uk.charliesay.VendingMachine.Inventory.ItemMap;
 import uk.charliesay.VendingMachine.Money.MoneyStore;
 
@@ -19,12 +19,12 @@ public class VendingMachineTest {
 
     @Test
     public void vendingMachine_ShouldSetUpVariables_WhenGivenEmptyConstructor(){
-        DisplayType displayType = vendingMachine.getDisplayType();
+        Display display = vendingMachine.getDisplay();
         MoneyStore moneyStore = vendingMachine.getMoneyStore();
         Dispenser dispenser = vendingMachine.getDispenser();
         ItemMap itemMap = vendingMachine.getItemMap();
 
-        Assert.assertNotNull(displayType);
+        Assert.assertNotNull(display);
         Assert.assertNotNull(moneyStore);
         Assert.assertNotNull(dispenser);
         Assert.assertNotNull(itemMap);
@@ -34,12 +34,12 @@ public class VendingMachineTest {
     public void vendingMachine_ShouldSetUpCustomVariables_WhenGivenLoadedConstructor(){
         vendingMachine = new VendingMachine(new ConsoleDisplay(),new ItemMap());
 
-        DisplayType displayType = vendingMachine.getDisplayType();
+        Display display = vendingMachine.getDisplay();
         MoneyStore moneyStore = vendingMachine.getMoneyStore();
         Dispenser dispenser = vendingMachine.getDispenser();
         ItemMap itemMap = vendingMachine.getItemMap();
 
-        Assert.assertNotNull(displayType);
+        Assert.assertNotNull(display);
         Assert.assertNotNull(moneyStore);
         Assert.assertNotNull(dispenser);
         Assert.assertNotNull(itemMap);

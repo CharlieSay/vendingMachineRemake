@@ -1,6 +1,6 @@
 package uk.charliesay.VendingMachine.Display;
 
-public class ConsoleDisplay extends DisplayType {
+public class ConsoleDisplay extends Display {
 
     private final String BREAKER_LINE = "=========================\n";
 

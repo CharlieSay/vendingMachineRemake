@@ -30,4 +30,10 @@ public class OledDisplayTest {
     public void should_ThrowIDException_WhenWrongDetachCodeIsGiven() throws InDetachmentException {
         testOledDisplayObject.detachScreen("BooFar");
     }
+
+    @Test
+    public void should_AllowDetachment_WhenCorrectCodeIsGiven() throws InDetachmentException {
+        boolean result = testOledDisplayObject.detachScreen("FooBar");
+        Assert.assertTrue(result);
+    }
 }

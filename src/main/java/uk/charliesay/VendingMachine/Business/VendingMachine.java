@@ -1,21 +1,21 @@
 package uk.charliesay.VendingMachine.Business;
 
 import uk.charliesay.VendingMachine.Display.ConsoleDisplay;
-import uk.charliesay.VendingMachine.Display.DisplayType;
+import uk.charliesay.VendingMachine.Display.Display;
 import uk.charliesay.VendingMachine.Inventory.ItemMap;
 import uk.charliesay.VendingMachine.Money.MoneyStore;
 
 public class VendingMachine {
 
-    private DisplayType displayType;
+    private Display display;
     private MoneyStore moneyStore;
     private Dispenser dispenser;
     private ItemMap itemMap;
 
 
     //Customisable DISPLAY and ITEMS settings
-    public VendingMachine(DisplayType displayType, ItemMap itemMap) {
-        this.displayType = displayType;
+    public VendingMachine(Display display, ItemMap itemMap) {
+        this.display = display;
         this.moneyStore = new MoneyStore();
         this.dispenser = new Dispenser();
         this.itemMap = itemMap;
@@ -23,14 +23,14 @@ public class VendingMachine {
 
     //Default Factory Settings
     public VendingMachine(){
-        this.displayType = new ConsoleDisplay();
+        this.display = new ConsoleDisplay();
         this.moneyStore = new MoneyStore();
         this.dispenser = new Dispenser();
         this.itemMap = new ItemMap();
     }
 
-    public DisplayType getDisplayType() {
-        return displayType;
+    public Display getDisplay() {
+        return display;
     }
 
     public MoneyStore getMoneyStore() {

@@ -1,6 +1,6 @@
 package uk.charliesay.VendingMachine.Display;
 
-public class LcdDisplay extends DisplayType{
+public class LcdDisplay extends Display {
 
     @Override
     String ReadInput(String contentToRead) {

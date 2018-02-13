@@ -3,7 +3,7 @@ package uk.charliesay.VendingMachine.Display;
 import uk.charliesay.VendingMachine.Exceptions.InDetachmentException;
 
 
-public class OledDisplay extends DisplayType implements Detachable {
+public class OledDisplay extends Display implements Detachable {
 
     public boolean detachScreen(String inputDetachCode) throws InDetachmentException {
             String detachCode = "FooBar";
