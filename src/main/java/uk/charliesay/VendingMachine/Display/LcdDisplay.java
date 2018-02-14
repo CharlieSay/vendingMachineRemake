@@ -17,6 +17,11 @@ public class LcdDisplay extends Display {
         System.out.println(ReadInput(contentToOutput));
     }
 
+    /*
+    This is purely for asthetic reasoning, it will take the String length,
+    Then put it into a "text" box and fully contain it.
+     */
+
     private String matchDisplayBordersToContent(String contentToMatch){
         String returnLCDStringLength = "";
         for (int i = 0; i<contentToMatch.length()/2; i++){

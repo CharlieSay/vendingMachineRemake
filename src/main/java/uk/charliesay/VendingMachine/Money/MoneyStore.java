@@ -24,7 +24,6 @@ public class MoneyStore {
     }
 
     public String getCurrentAmountFormattedAsString(){
-        DecimalFormat decim = new DecimalFormat("0.00");
-        return ("£"+decim.format(currentAmount));
+        return ("£"+new DecimalFormat("0.00").format(currentAmount));
     }
 }

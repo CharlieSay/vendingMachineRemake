@@ -6,9 +6,9 @@ import uk.charliesay.VendingMachine.Exceptions.InDetachmentException;
 public class OledDisplay extends Display implements Detachable {
 
     public boolean detachScreen(String inputDetachCode) throws InDetachmentException {
-            String detachCode = "FooBar";
-            if (detachCode.equalsIgnoreCase(inputDetachCode)){
-                //Pretend Case "as if there was some deatchment code";
+        //Pretend Case "as if there was some deatchment code";
+        String detachCode = "FooBar";
+        if (detachCode.equalsIgnoreCase(inputDetachCode)){
                 return true;
             }else{
                 throw new InDetachmentException("Something went wrong with screen detach.");
