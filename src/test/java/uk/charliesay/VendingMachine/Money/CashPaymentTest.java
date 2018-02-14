@@ -26,7 +26,7 @@ public class CashPaymentTest {
     }
 
     @Test
-    public void should_ReturnTrue_WhenTransactionValueIsLessThanMoneyInStore(){
+    public void should_ReturnTrue_WhenTransactionValueIsLessThanMoneyInStore_ThereforeMakingPurchase(){
         BigDecimal onePoundBigDecimal = new BigDecimal(1.00);
         MoneyStore moneyStore = new MoneyStore();
         moneyStore.addToStore(new BigDecimal(5.00));

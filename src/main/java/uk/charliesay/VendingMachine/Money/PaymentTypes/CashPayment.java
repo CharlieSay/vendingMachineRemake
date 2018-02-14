@@ -34,17 +34,8 @@ public class CashPayment extends Payment {
         return true;
     }
 
-    private boolean paymentSuccessful() {
-        int resultFromTransaction = amountBeforeTransaction.subtract(amountToPay)
-                                                           .compareTo(moneyStore.getCurrentAmount());
-        switch (resultFromTransaction){
-            case (-1):
-                return false;
-            case (0):
-                return true;
-            case (1):
-                return false;
-        }
-        return false;
+    private void paymentSuccessful() {
+        amountBeforeTransaction.subtract(amountToPay)
+                               .compareTo(moneyStore.getCurrentAmount());
     }
 }

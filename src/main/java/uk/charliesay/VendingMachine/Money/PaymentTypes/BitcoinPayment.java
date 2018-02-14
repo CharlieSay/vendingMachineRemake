@@ -36,8 +36,8 @@ public class BitcoinPayment extends Payment {
             return new ImageIcon(image);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     private void qrCodeDisplay(){
@@ -47,8 +47,8 @@ public class BitcoinPayment extends Payment {
        frame.getContentPane().add(label);
        frame.pack();
        frame.setLocation(200,200);
-       frame.setVisible(true);
        frame.setResizable(false);
+       frame.setVisible(true);
        }
 
 }

@@ -3,8 +3,13 @@ package uk.charliesay.VendingMachine.Money.PaymentTypes;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 
 import javax.swing.*;
+
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class BitcoinPaymentTest {
 
@@ -43,4 +48,8 @@ public class BitcoinPaymentTest {
         Assert.assertEquals(resultHashAddress,testCaseHashAddress);
     }
 
+    @Test
+    public void test(){
+        Assert.assertTrue(bitcoinPayment.makePayment());
+    }
 }
