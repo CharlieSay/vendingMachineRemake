@@ -1,8 +1,11 @@
-package uk.charliesay.VendingMachine.Money;
+package uk.charliesay.VendingMachine.Money.PaymentTypes;
+
+import uk.charliesay.VendingMachine.Money.MoneyStore;
+import uk.charliesay.VendingMachine.Money.Payment;
 
 import java.math.BigDecimal;
 
-public class CashPayment extends Payment{
+public class CashPayment extends Payment {
 
     private MoneyStore moneyStore;
     private BigDecimal amountToPay;

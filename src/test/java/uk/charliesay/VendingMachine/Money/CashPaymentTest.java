@@ -3,6 +3,7 @@ package uk.charliesay.VendingMachine.Money;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
+import uk.charliesay.VendingMachine.Money.PaymentTypes.CashPayment;
 
 import java.math.BigDecimal;
 
