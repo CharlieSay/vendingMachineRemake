@@ -8,14 +8,16 @@ public class CardPaymentTest {
 
     CardPayment testCardPayment;
 
+
     @Before
     public void classSetUp(){
         testCardPayment = new CardPayment();
     }
 
     @Test
-    public void test(){
+    public void should_ReturnTrue_WhenTryingPayment(){
         Assert.assertTrue(testCardPayment.makePayment());
     }
+
 
 }
