@@ -3,6 +3,7 @@ package uk.charliesay.VendingMachine.Inventory;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import uk.charliesay.VendingMachine.Button.Button;
 
 public class ItemMapTest {
 
@@ -15,7 +16,7 @@ public class ItemMapTest {
 
     @Test
     public void test(){
-        Assert.assertFalse(itemMapTestObject.isSoldOut());
+        Assert.assertFalse(itemMapTestObject.isSoldOut(new Button()));
     }
 
 }

@@ -18,7 +18,7 @@ public class LcdDisplay extends Display {
     }
 
     /*
-    This is purely for asthetic reasoning, it will take the String length,
+    This is purely for aesthetic reasoning, it will take the String length,
     Then put it into a "text" box and fully contain it.
      */
 
