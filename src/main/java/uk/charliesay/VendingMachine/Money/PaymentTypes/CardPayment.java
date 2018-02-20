@@ -3,7 +3,7 @@ package uk.charliesay.VendingMachine.Money.PaymentTypes;
 import uk.charliesay.VendingMachine.Money.Contactless;
 import uk.charliesay.VendingMachine.Money.Payment;
 
-import java.util.Random;
+import java.math.BigDecimal;
 
 /*
 To IMPLEMENT
@@ -15,49 +15,59 @@ Just to make it look nicer.
  */
 
 public class CardPayment extends Payment implements Contactless{
-
+    enum cardPaymentType{
+        CHIP_PIN,
+        CONTACTLESS;
+    }
     private String cardNumber;
-    private String cardPin;
+    private Integer cardPin;
+    private BigDecimal paymentAmount;
 
     @Override
     public boolean makePayment() {
-        if (true){
-            cardProcessing(cardPaymentType.CHIP_PIN);
-            return true;
-        }else{
-            cardProcessing(cardPaymentType.CONTACTLESS);
-            return true;
-        }
-    }
-
-    private boolean cardProcessing(cardPaymentType cardPaymentType){
-        if (cardPaymentType == CardPayment.cardPaymentType.CHIP_PIN){
-            cardNumber = "4716415419526949";
-            cardPin = "7123";
-            return true;
-        }else if(cardPaymentType == CardPayment.cardPaymentType.CONTACTLESS){
-            contactlessProtocool();
+        if (cardPin != null || cardNumber != null || paymentAmount != null){
             return true;
         }
         return false;
     }
 
+    public CardPayment(cardPaymentType cp, BigDecimal amountToPay){
+        if (cp == cardPaymentType.CHIP_PIN){
+            chipPinProtocool();
+            this.paymentAmount = amountToPay;
+            makePayment();
+        }else if (cp == cardPaymentType.CONTACTLESS){
+            contactlessProtocool();
+            this.paymentAmount = amountToPay;
+            makePayment();
+        }else{
+            System.out.println("Something went wrong...\nCouldn't catch type of card payment.");
+            cardNumber = null;
+            cardPin = null;
+            paymentAmount = null;
+        }
+    }
+
     @Override
     public void contactlessProtocool() {
         cardNumber = "4716415419526949";
-        cardPin = "7123";
+        cardPin = 1234;
     }
 
-    enum cardPaymentType{
-        CHIP_PIN,
-        CONTACTLESS;
+    public void chipPinProtocool(){
+        cardNumber = "4716415419526949";
+        cardPin = 4321;
     }
 
     public String getCardNumber() {
         return cardNumber;
     }
 
-    public String getCardPin() {
+    public int getCardPin() {
         return cardPin;
+    }
+
+    public BigDecimal getPaymentAmount() {
+        return paymentAmount;
     }
 }
