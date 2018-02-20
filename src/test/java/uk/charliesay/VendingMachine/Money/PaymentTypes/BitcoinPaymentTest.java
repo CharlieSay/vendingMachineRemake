@@ -3,21 +3,16 @@ package uk.charliesay.VendingMachine.Money.PaymentTypes;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
-
 import javax.swing.*;
-
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import java.math.BigDecimal;
 
 public class BitcoinPaymentTest {
 
-    BitcoinPayment bitcoinPayment = new BitcoinPayment();
+    BitcoinPayment bitcoinPayment;
 
     @Before
     public void setUp(){
-        bitcoinPayment = new BitcoinPayment();
+        bitcoinPayment = new BitcoinPayment(new BigDecimal(1.00));
     }
 
     @Test
@@ -49,7 +44,12 @@ public class BitcoinPaymentTest {
     }
 
     @Test
-    public void test(){
+    public void should_ConvertToBTC(){
+
+    }
+
+    @Test
+    public void should_ReturnTrueonMakePayment(){
         Assert.assertTrue(bitcoinPayment.makePayment());
     }
 }

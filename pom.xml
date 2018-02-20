@@ -37,7 +37,13 @@
     <dependency>
         <artifactId>junit</artifactId>
         <groupId>junit</groupId>
-        <version>4.11</version> <!-- Or whatever JUnit you're using. -->
+        <version>4.11</version>
+    </dependency>
+
+    <dependency>
+        <groupId>org.json</groupId>
+        <artifactId>json</artifactId>
+        <version>20180130</version>
     </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->

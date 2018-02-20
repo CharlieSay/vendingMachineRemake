@@ -15,10 +15,12 @@ Just to make it look nicer.
  */
 
 public class CardPayment extends Payment implements Contactless{
+
     enum cardPaymentType{
         CHIP_PIN,
         CONTACTLESS;
     }
+
     private String cardNumber;
     private Integer cardPin;
     private BigDecimal paymentAmount;
