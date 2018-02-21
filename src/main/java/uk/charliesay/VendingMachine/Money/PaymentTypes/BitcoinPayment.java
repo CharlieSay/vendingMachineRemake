@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 
 /*
-To Implement current rate of BTC/USD
+To Implement current rate of BTC/USD Against price of ITEM.
  */
 
 public class BitcoinPayment extends Payment {

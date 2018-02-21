@@ -27,15 +27,9 @@ public class CashPayment extends Payment {
 
     private boolean fundCheck(){
         int resultFromFundCheck = amountBeforeTransaction.compareTo(amountToPay);
-        if (resultFromFundCheck == -1){
+        if (resultFromFundCheck < 0){
             return false;
         }
-        paymentSuccessful();
         return true;
-    }
-
-    private void paymentSuccessful() {
-        amountBeforeTransaction.subtract(amountToPay)
-                               .compareTo(moneyStore.getCurrentAmount());
     }
 }

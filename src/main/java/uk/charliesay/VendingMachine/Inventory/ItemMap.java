@@ -15,7 +15,7 @@ public class ItemMap implements Inventory {
     }
 
     @Override
-    public boolean isSoldOut(Button buttonPressed) {
+    public boolean isSoldOut(ItemButton buttonPressed) {
         return false;
     }
 
@@ -23,12 +23,22 @@ public class ItemMap implements Inventory {
         itemMap.put(itemButton,quantity);
     }
 
-    public Item getItem() {
-        for (Map.Entry<ItemButton, Integer> entry : itemMap.entrySet()) {
-            ItemButton key = entry.getKey();
-            Integer value = entry.getValue();
-            return key.getItem();
+    public Item getItem(ItemButton itemButton) {
+        if (itemButton.getItem() == null){
+            return null;
+        }else{
+            for (Map.Entry<ItemButton, Integer> entry : itemMap.entrySet()) {
+                ItemButton itemButtonIteration = entry.getKey();
+                if (itemButtonIteration.getItem().getItemName().equals(itemButton.getItem().getItemName())) {
+                    return itemButton.getItem();
+                }
+            }
         }
         return null;
     }
+
+    public boolean decreaseQuantity(ItemButton itemButton){
+        return false;
+    }
+
 }
