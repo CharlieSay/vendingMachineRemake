@@ -15,7 +15,7 @@ public class ItemMap implements Inventory {
 
     @Override
     public boolean isSoldOut(ItemButton buttonPressed) {
-        return false;
+        return (getQuantity(buttonPressed) <= 0);
     }
 
     public void addItemToList(ItemButton itemButton, Integer quantity){
@@ -36,7 +36,38 @@ public class ItemMap implements Inventory {
         return null;
     }
 
+    //////////////////
+    //QUANTITY BLOCK//
+    //////////////////
+
+    public boolean setQuantity(ItemButton itemButton, Integer setTo){
+        for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
+            if (itemButton.getFriendlyName().equals(entry.getKey().getFriendlyName())) {
+                entry.setValue(setTo);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Integer getQuantity(ItemButton itemButton) {
+        for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
+        if (itemButton.getFriendlyName().equals(entry.getKey().getFriendlyName())) {
+            Integer currentAmount = entry.getValue();
+            return currentAmount;
+            }
+        }
+        return null;
+    }
+
     public boolean decreaseQuantity(ItemButton itemButton){
+        for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
+            if (itemButton.getFriendlyName().equals(entry.getKey().getFriendlyName())){
+                Integer currentAmount = entry.getValue();
+                entry.setValue(--currentAmount);
+                return true;
+            }
+        }
         return false;
     }
 
