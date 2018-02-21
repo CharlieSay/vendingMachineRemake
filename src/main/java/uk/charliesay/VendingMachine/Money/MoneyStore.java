@@ -1,6 +1,7 @@
 package uk.charliesay.VendingMachine.Money;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
 public class MoneyStore {
@@ -8,7 +9,7 @@ public class MoneyStore {
     private BigDecimal currentAmount;
 
     public MoneyStore(){
-        currentAmount = new BigDecimal(0.00);
+        currentAmount = BigDecimal.valueOf(0.00).setScale(2, RoundingMode.CEILING);
     }
 
     public void addToStore(BigDecimal amountToAdd){

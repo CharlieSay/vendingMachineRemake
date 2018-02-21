@@ -6,10 +6,11 @@ import org.junit.Test;
 import uk.charliesay.VendingMachine.Money.MoneyStore;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class CancelButtonTest {
 
-    CancelButton cancelButtonTestObject;
+    private CancelButton cancelButtonTestObject;
 
     @Before
     public void setUp(){
@@ -19,13 +20,13 @@ public class CancelButtonTest {
     @Test
     public void should_RemoveFundsFromStore_WhenRefundCashIsCalled(){
         MoneyStore moneyStore = new MoneyStore();
-        moneyStore.addToStore(new BigDecimal(5.00));
+        moneyStore.addToStore(new BigDecimal(5.00).setScale(2, RoundingMode.CEILING));
 
         cancelButtonTestObject.refundCash(moneyStore);
 
         BigDecimal moneyInStoreAfterRemoval = moneyStore.getCurrentAmount();
 
-        Assert.assertEquals("0",moneyInStoreAfterRemoval.toPlainString());
+        Assert.assertEquals("0.00",moneyInStoreAfterRemoval.toPlainString());
     }
 
 }

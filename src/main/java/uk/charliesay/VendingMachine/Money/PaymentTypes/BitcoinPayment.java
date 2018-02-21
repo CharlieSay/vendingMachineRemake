@@ -9,6 +9,8 @@ import javax.swing.JLabel;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
 To Implement current rate of BTC/USD Against price of ITEM.
@@ -45,7 +47,8 @@ public class BitcoinPayment extends Payment {
             BufferedImage image = ImageIO.read(url);
             return new ImageIcon(image);
         } catch (Exception e) {
-            e.printStackTrace();
+            Logger LOGGER = Logger.getLogger("Log");
+            LOGGER.log(Level.SEVERE,"Something went wrong",e);
             return null;
         }
     }
