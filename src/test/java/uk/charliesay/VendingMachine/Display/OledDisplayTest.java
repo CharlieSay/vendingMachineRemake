@@ -21,7 +21,7 @@ public class OledDisplayTest {
                           "> Released Cheddars - £1 Left\n" +
                           "><><><><><><><><><><><><><\n";
 
-        String testResult = testOledDisplayObject.ReadInput(testSubject);
+        String testResult = testOledDisplayObject.readInput(testSubject);
 
         Assert.assertEquals(shouldBe,testResult);
     }

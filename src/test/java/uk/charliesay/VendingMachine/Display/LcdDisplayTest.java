@@ -22,7 +22,7 @@ public class LcdDisplayTest {
                           "x+ Released Yacht - £1 Left x+\n" +
                           "x+x+x+x+x+x+x+x+x+x+x+x+x+x+x+\n";
 
-        String methodReturn = testLcdDisplayObject.ReadInput(currentMoney);
+        String methodReturn = testLcdDisplayObject.readInput(currentMoney);
 
         Assert.assertThat(methodReturn,is(shouldBe));
 
@@ -35,7 +35,7 @@ public class LcdDisplayTest {
                           "x+ BleepBloop x+\n" +
                           "x+x+x+x+x+x+x+x+\n";
 
-        String methodReturn = testLcdDisplayObject.ReadInput(currentMoney);
+        String methodReturn = testLcdDisplayObject.readInput(currentMoney);
 
         Assert.assertThat(methodReturn,is(shouldBe));
 

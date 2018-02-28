@@ -26,10 +26,11 @@ public class CashPayment extends Payment {
     }
 
     private boolean fundCheck(){
-        int resultFromFundCheck = amountBeforeTransaction.compareTo(amountToPay);
-        if (resultFromFundCheck < 0){
-            return false;
-        }
-        return true;
+        return (!(amountBeforeTransaction.compareTo(amountToPay) < 0));
+//        int resultFromFundCheck = amountBeforeTransaction.compareTo(amountToPay);
+//        if (resultFromFundCheck < 0){
+//            return false;
+//        }
+//        return true;
     }
 }

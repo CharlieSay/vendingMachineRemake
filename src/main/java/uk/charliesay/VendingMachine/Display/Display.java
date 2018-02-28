@@ -2,7 +2,7 @@ package uk.charliesay.VendingMachine.Display;
 
 public abstract class Display {
 
-    abstract String ReadInput(String contentToRead);
-    abstract void OutputContent(String contentToOutput);
+    abstract String readInput(String contentToRead);
+    abstract void outputContent(String contentToOutput);
 
 }

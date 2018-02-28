@@ -5,17 +5,17 @@ public class ConsoleDisplay extends Display {
     private final String BREAKER_LINE = "=========================\n";
 
     @Override
-    public String ReadInput(String contentToRead) {
+    public String readInput(String contentToRead) {
         String inputStringBuilder = "";
         inputStringBuilder += (BREAKER_LINE);
         inputStringBuilder += (contentToRead + "\n");
         inputStringBuilder += (BREAKER_LINE);
-        OutputContent(inputStringBuilder);
+        outputContent(inputStringBuilder);
         return inputStringBuilder;
     }
 
     @Override
-    public void OutputContent(String contentToOutput) {
+    public void outputContent(String contentToOutput) {
         System.out.println(contentToOutput);
     }
 }

@@ -17,7 +17,7 @@ public class OledDisplay extends Display implements Detachable {
     }
 
     @Override
-    String ReadInput(String contentToRead) {
+    String readInput(String contentToRead) {
         String oledContentFormatted = "";
         oledContentFormatted += "><><><><><><><><><><><><><\n";
         oledContentFormatted += "> "+ contentToRead + "\n";
@@ -26,7 +26,7 @@ public class OledDisplay extends Display implements Detachable {
     }
 
     @Override
-    void OutputContent(String contentToOutput) {
-        System.out.println(ReadInput(contentToOutput));
+    void outputContent(String contentToOutput) {
+        System.out.println(readInput(contentToOutput));
     }
 }

@@ -20,7 +20,7 @@ public class ConsoleDisplayTest {
         String testString = "This is a Big Ting";
         String resultShouldBe = "=========================";
 
-        String resultString = testConsoleDisplay.ReadInput(testString);
+        String resultString = testConsoleDisplay.readInput(testString);
         String[] resultStringArray = resultString.split("\n");
 
         Assert.assertThat(resultStringArray[0],is(resultShouldBe));
@@ -34,7 +34,7 @@ public class ConsoleDisplayTest {
                                  "Test Object\n" +
                                  "=========================\n";
 
-        String resultString = testConsoleDisplay.ReadInput(testString);
+        String resultString = testConsoleDisplay.readInput(testString);
 
         Assert.assertEquals(endResultString,resultString);
     }
