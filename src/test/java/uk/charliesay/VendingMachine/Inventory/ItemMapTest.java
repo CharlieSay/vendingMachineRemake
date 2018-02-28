@@ -115,8 +115,8 @@ public class ItemMapTest {
         ItemButton drPepperItemButton = new ItemButton(drPepperCharacterButton, drPepperNumberButton, drPepper);
         itemMapTestObject.addItemToList(drPepperItemButton, 10);
 
-        String resultShouldBe = "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n" +
-                "Item Name : Dr Pepper Item Price : 1.00 Button : B1 Quantity : 10\n";
+        String resultShouldBe = "Item Name : Dr Pepper Item Price : 1.00 Button : B1 Quantity : 10\n"+
+        "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n";
 
         Assert.assertEquals(resultShouldBe,itemMapTestObject.toString());
     }
@@ -141,5 +141,6 @@ public class ItemMapTest {
         testSpriteCharacterButton = null;
         testSpriteNumberButton = null;
         testSpriteItemButton = null;
+        itemMapTestObject = null;
     }
 }
