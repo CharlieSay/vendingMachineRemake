@@ -13,7 +13,7 @@ public class ItemButton extends Button {
         this.characterButton = characterButton;
         this.numberButton = numberButton;
         this.item = item;
-            friendlyName = (characterButton.getCharacterValueAsChar()+numberButton.getButtonID().toString());
+        friendlyName = (characterButton.getCharacterValueAsChar() + numberButton.getButtonID().toString());
     }
 
     public String getFriendlyName() {

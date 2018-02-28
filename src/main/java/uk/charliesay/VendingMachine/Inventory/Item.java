@@ -14,7 +14,7 @@ public class Item {
     }
 
     public String getFriendlyDetails(){
-        return ("Item Name : "+ itemName +"\nItem Price : " + absolutePrice.toString());
+        return ("Item Name : "+ itemName +" Item Price : " + absolutePrice.toString());
     }
 
     public BigDecimal getAbsolutePrice() {

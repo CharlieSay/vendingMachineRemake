@@ -81,6 +81,15 @@ public class ItemMapTest {
     }
 
     @Test
+    public void should_ReturnQuantityNull_IfItemDoesNotExist(){
+        Item dummyItem = new Item(new BigDecimal(1.00), "Dummy");
+        CharacterButton dummyCharacterButton = new CharacterButton(C);
+        NumberButton dummyNumberButton = new NumberButton(1);
+        ItemButton dummyItemButton = new ItemButton(dummyCharacterButton, dummyNumberButton, dummyItem);
+        Assert.assertNull(itemMapTestObject.getQuantity(dummyItemButton));
+    }
+
+    @Test
     public void should_SetQuantityOfIntegerInMap_WhenGivenValidItem_ThenReturnTrue(){
         Integer testCaseInteger15 = 15;
         itemMapTestObject.setQuantity(testSpriteItemButton,testCaseInteger15);
@@ -96,6 +105,34 @@ public class ItemMapTest {
         ItemButton dummyItemButton = new ItemButton(dummyCharacterButton, dummyNumberButton, dummyItem);
         boolean resultAfterIncrease = itemMapTestObject.setQuantity(dummyItemButton,5);
         Assert.assertFalse(resultAfterIncrease);
+    }
+
+    @Test
+    public void should_giveStringOfCurrentInventory_WhenRequested(){
+        Item drPepper = new Item(new BigDecimal(1.00), "Dr Pepper");
+        CharacterButton drPepperCharacterButton = new CharacterButton(B);
+        NumberButton drPepperNumberButton = new NumberButton(1);
+        ItemButton drPepperItemButton = new ItemButton(drPepperCharacterButton, drPepperNumberButton, drPepper);
+        itemMapTestObject.addItemToList(drPepperItemButton, 10);
+
+        String resultShouldBe = "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n" +
+                "Item Name : Dr Pepper Item Price : 1.00 Button : B1 Quantity : 10\n";
+
+        Assert.assertEquals(resultShouldBe,itemMapTestObject.toString());
+    }
+
+    @Test
+    public void should_RemoveItemFromList_WhenGivenAValidItemThatMatchesAListedItem(){
+        Item drPepper = new Item(new BigDecimal(1.00), "Dr Pepper");
+        CharacterButton drPepperCharacterButton = new CharacterButton(B);
+        NumberButton drPepperNumberButton = new NumberButton(1);
+        ItemButton drPepperItemButton = new ItemButton(drPepperCharacterButton, drPepperNumberButton, drPepper);
+        String resultShouldBe = "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n";
+
+        itemMapTestObject.addItemToList(drPepperItemButton, 10);
+        itemMapTestObject.removeItemFromList(drPepperItemButton);
+
+        Assert.assertEquals(resultShouldBe,itemMapTestObject.toString());
     }
 
     @After
