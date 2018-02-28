@@ -27,7 +27,7 @@ public class ItemTest {
         itemTestObject = new Item(price,"Dr Pepper");
 
         String resultFriendlyDetails = itemTestObject.getFriendlyDetails();
-        String shouldBe = ("Item Name : Dr Pepper\nItem Price : 1.20");
+        String shouldBe = ("Item Name : Dr Pepper Item Price : 1.20");
 
         Assert.assertEquals(resultFriendlyDetails,shouldBe);
     }

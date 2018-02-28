@@ -14,11 +14,11 @@ import static uk.charliesay.VendingMachine.Button.CharacterButton.availableChara
 
 public class ItemMapTest {
 
-    ItemMap itemMapTestObject;
-    Item testSpriteItem;
-    CharacterButton testSpriteCharacterButton;
-    NumberButton testSpriteNumberButton;
-    ItemButton testSpriteItemButton;
+    private ItemMap itemMapTestObject;
+    private Item testSpriteItem;
+    private CharacterButton testSpriteCharacterButton;
+    private NumberButton testSpriteNumberButton;
+    private ItemButton testSpriteItemButton;
 
     @Before
     public void setUp() {
@@ -114,10 +114,9 @@ public class ItemMapTest {
         NumberButton drPepperNumberButton = new NumberButton(1);
         ItemButton drPepperItemButton = new ItemButton(drPepperCharacterButton, drPepperNumberButton, drPepper);
         itemMapTestObject.addItemToList(drPepperItemButton, 10);
-
-        String resultShouldBe = "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n" +
-                "Item Name : Dr Pepper Item Price : 1.00 Button : B1 Quantity : 10\n";
-
+        String resultShouldBe =
+                "Item Name : Dr Pepper Item Price : 1.00 Button : B1 Quantity : 10\n"+
+                "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n";
         Assert.assertEquals(resultShouldBe,itemMapTestObject.toString());
     }
 
@@ -141,5 +140,6 @@ public class ItemMapTest {
         testSpriteCharacterButton = null;
         testSpriteNumberButton = null;
         testSpriteItemButton = null;
+        itemMapTestObject = null;
     }
 }
