@@ -53,7 +53,6 @@ public class ItemMapTest {
 
     @Test
     public void should_AddItemToMap_ThenReturnNullWhenRequestingItemThatIsntInMap() {
-        //Dummy Item
         Item drPepper = new Item(new BigDecimal(1.00), "Dr Pepper");
         CharacterButton drPepperCharacterButton = new CharacterButton(B);
         NumberButton drPepperNumberButton = new NumberButton(1);
@@ -66,10 +65,7 @@ public class ItemMapTest {
 
     @Test
     public void shouldNot_DecreaseQuantityOfAnyIntegerInMap_WhenAskedToRemoveAnItemThatDoesntExist() {
-        Item dummyItem = new Item(new BigDecimal(1.00), "Dummy");
-        CharacterButton dummyCharacterButton = new CharacterButton(C);
-        NumberButton dummyNumberButton = new NumberButton(1);
-        ItemButton dummyItemButton = new ItemButton(dummyCharacterButton, dummyNumberButton, dummyItem);
+        ItemButton dummyItemButton = dummyButton();
         Assert.assertFalse(itemMapTestObject.decreaseQuantity(dummyItemButton));
     }
 
@@ -82,10 +78,7 @@ public class ItemMapTest {
 
     @Test
     public void should_ReturnQuantityNull_IfItemDoesNotExist(){
-        Item dummyItem = new Item(new BigDecimal(1.00), "Dummy");
-        CharacterButton dummyCharacterButton = new CharacterButton(C);
-        NumberButton dummyNumberButton = new NumberButton(1);
-        ItemButton dummyItemButton = new ItemButton(dummyCharacterButton, dummyNumberButton, dummyItem);
+        ItemButton dummyItemButton = dummyButton();
         Assert.assertNull(itemMapTestObject.getQuantity(dummyItemButton));
     }
 
@@ -99,10 +92,7 @@ public class ItemMapTest {
 
     @Test
     public void should_SetQuantityOfIntegerInMap_WhenGivenInvalidItem_ThenReturnFalse(){
-        Item dummyItem = new Item(new BigDecimal(1.00), "Dummy");
-        CharacterButton dummyCharacterButton = new CharacterButton(C);
-        NumberButton dummyNumberButton = new NumberButton(1);
-        ItemButton dummyItemButton = new ItemButton(dummyCharacterButton, dummyNumberButton, dummyItem);
+        ItemButton dummyItemButton = dummyButton();
         boolean resultAfterIncrease = itemMapTestObject.setQuantity(dummyItemButton,5);
         Assert.assertFalse(resultAfterIncrease);
     }
@@ -126,6 +116,14 @@ public class ItemMapTest {
         itemMapTestObject.removeItemFromList(drPepperItemButton);
 
         Assert.assertEquals(resultShouldBe,itemMapTestObject.toString());
+    }
+
+    private ItemButton dummyButton(){
+        Item dummyItem = new Item(new BigDecimal(1.00), "Dummy");
+        CharacterButton dummyCharacterButton = new CharacterButton(C);
+        NumberButton dummyNumberButton = new NumberButton(1);
+        ItemButton dummyItemButton = new ItemButton(dummyCharacterButton, dummyNumberButton, dummyItem);
+        return dummyItemButton;
     }
 
     @After
