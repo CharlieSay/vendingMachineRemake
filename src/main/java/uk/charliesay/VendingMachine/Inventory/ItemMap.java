@@ -1,6 +1,8 @@
 package uk.charliesay.VendingMachine.Inventory;
 
+import uk.charliesay.VendingMachine.Button.CharacterButton;
 import uk.charliesay.VendingMachine.Button.ItemButton;
+import uk.charliesay.VendingMachine.Button.NumberButton;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,17 @@ public class ItemMap implements Inventory {
         }
     }
 
+    public ItemButton getItemButton(CharacterButton characterButton, NumberButton numberButton){
+        for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
+            ItemButton itemButtonIteration = entry.getKey();
+            if ((itemButtonIteration.getCharacterButton().getCharacterValue().equals(characterButton.getCharacterValue())) &&
+                    itemButtonIteration.getNumberButton().getButtonID().intValue() == numberButton.getButtonID().intValue()){
+                return itemButtonIteration;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString(){
         StringBuilder currentList = new StringBuilder();
@@ -57,9 +70,14 @@ public class ItemMap implements Inventory {
         return null;
     }
 
-    //////////////////
-    //QUANTITY BLOCK//
-    //////////////////
+    public Integer getQuantity(ItemButton itemButton) {
+        for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
+            if (itemButton.getFriendlyName().equals(entry.getKey().getFriendlyName())) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }
 
     public boolean setQuantity(ItemButton itemButton, Integer setTo){
         for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
@@ -69,15 +87,6 @@ public class ItemMap implements Inventory {
             }
         }
         return false;
-    }
-
-    public Integer getQuantity(ItemButton itemButton) {
-        for (Map.Entry<ItemButton, Integer> entry : itemInventoryMap.entrySet()) {
-        if (itemButton.getFriendlyName().equals(entry.getKey().getFriendlyName())) {
-            return entry.getValue();
-            }
-        }
-        return null;
     }
 
     public boolean decreaseQuantity(ItemButton itemButton){

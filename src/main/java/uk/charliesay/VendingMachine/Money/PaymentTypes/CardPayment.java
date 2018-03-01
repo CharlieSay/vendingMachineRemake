@@ -16,7 +16,7 @@ Just to make it look nicer.
 
 public class CardPayment extends Payment implements Contactless{
 
-    enum cardPaymentType{
+    public enum cardPaymentType{
         CHIP_PIN,
         CONTACTLESS;
     }

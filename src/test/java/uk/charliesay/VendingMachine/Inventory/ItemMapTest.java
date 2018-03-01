@@ -109,13 +109,7 @@ public class ItemMapTest {
 
     @Test
     public void should_giveStringOfCurrentInventory_WhenRequested(){
-        Item drPepper = new Item(new BigDecimal(1.00), "Dr Pepper");
-        CharacterButton drPepperCharacterButton = new CharacterButton(B);
-        NumberButton drPepperNumberButton = new NumberButton(1);
-        ItemButton drPepperItemButton = new ItemButton(drPepperCharacterButton, drPepperNumberButton, drPepper);
-        itemMapTestObject.addItemToList(drPepperItemButton, 10);
         String resultShouldBe =
-                "Item Name : Dr Pepper Item Price : 1.00 Button : B1 Quantity : 10\n"+
                 "Item Name : Sprite Item Price : 1.00 Button : A1 Quantity : 10\n";
         Assert.assertEquals(resultShouldBe,itemMapTestObject.toString());
     }

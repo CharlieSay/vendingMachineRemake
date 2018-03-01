@@ -3,7 +3,7 @@ package uk.charliesay.VendingMachine.Display;
 public class LcdDisplay extends Display {
 
     @Override
-    String readInput(String contentToRead) {
+    public String readInput(String contentToRead) {
         String LCD_Format = matchDisplayBordersToContent(contentToRead);
         String lcdContentFormatted = "";
         lcdContentFormatted += LCD_Format + "\n";
@@ -13,7 +13,7 @@ public class LcdDisplay extends Display {
     }
 
     @Override
-    void outputContent(String contentToOutput) {
+    public void outputContent(String contentToOutput) {
         System.out.println(readInput(contentToOutput));
     }
 
