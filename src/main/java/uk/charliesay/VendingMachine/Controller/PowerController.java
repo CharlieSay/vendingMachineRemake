@@ -14,10 +14,10 @@ public class PowerController {
     }
 
     private static void turnOff(){
-
+        //Pretend turn off
     }
 
     public static void idle(){
-
+        //Pretend 'idle' state
     }
 }

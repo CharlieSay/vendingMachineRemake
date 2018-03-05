@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 
 public class OrderController {
 
+    private static final String DISPENSED = "Dispensed";
     private VendingMachine vendingMachine;
 
     public OrderController(VendingMachine vendingMachine){
@@ -31,16 +32,16 @@ public class OrderController {
             sb.append(characterButton.getCharacterValueAsChar());
             sb.append(numberButton.getButtonID() + "\n");
             sb.append("With payment type " + paymentNeeded);
-            Logger.getGlobal().log(Level.WARNING,sb.toString());
+            Logger.getGlobal().log(Level.WARNING, "Something went wrong: {0} ", sb.toString());
             return false;
         }else{
             BigDecimal itemPrice = itemButton.getItem().getAbsolutePrice();
             PaymentTypes paymentTypes = paymentTypeNeeded(paymentNeeded);
             if (paymentTypes == null){
                 StringBuilder sb = new StringBuilder();
-                sb.append("Correct CHAR and NUMBER Button however");
+                sb.append("Correct CHAR and NUMBER Button however ");
                 sb.append("Payment type incorrect " + paymentNeeded);
-                Logger.getGlobal().log(Level.SEVERE,sb.toString());
+                Logger.getGlobal().log(Level.SEVERE, "Something went wrong: {0} ", sb.toString());
                 return false;
             }
             switch (paymentTypes) {
@@ -48,7 +49,7 @@ public class OrderController {
                     CashPayment cashPayment = new CashPayment(itemPrice, vendingMachine.getMoneyStore());
                     if (cashPayment.makePayment()){
                         DispenseRequest(itemButton.getItem());
-                        vendingMachine.getDisplay().outputContent("Dispensed");
+                        vendingMachine.getDisplay().outputContent(DISPENSED);
                         DecreaseItemQuantity(itemButton);
                         return true;
                     }else{
@@ -57,15 +58,15 @@ public class OrderController {
             }
                 case CARD_CONTACTLESS:
                     new CardPayment(CardPayment.cardPaymentType.CONTACTLESS, itemPrice).makePayment();
-                    vendingMachine.getDisplay().outputContent("Dispensed");
+                    vendingMachine.getDisplay().outputContent(DISPENSED);
                     return true;
                 case CARD_CHIP_PIN:
                     new CardPayment(CardPayment.cardPaymentType.CHIP_PIN, itemPrice).makePayment();
-                    vendingMachine.getDisplay().outputContent("Dispensed");
+                    vendingMachine.getDisplay().outputContent(DISPENSED);
                     return true;
                 case BITCOIN:
                     new BitcoinPayment(itemPrice).makePayment();
-                    vendingMachine.getDisplay().outputContent("Dispensed");
+                    vendingMachine.getDisplay().outputContent(DISPENSED);
                     return true;
             }
         }
@@ -89,7 +90,7 @@ public class OrderController {
         try {
             vendingMachine.getDispenser().dispenseItem(item);
         } catch (PhysicalException e) {
-            e.printStackTrace();
+            Logger.getGlobal().log(Level.SEVERE,e.getMessage());
         }
     }
 
