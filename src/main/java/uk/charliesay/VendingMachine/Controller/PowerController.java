@@ -7,13 +7,14 @@ public class PowerController {
     public static void main(String[] args) {
         PowerController powerController = new PowerController();
         powerController.turnOn();
+        powerController.turnOff();
     }
 
-    private static void turnOn(){
+    private void turnOn(){
         //Pretend get config, of display, inventory... etc....
     }
 
-    private static void turnOff(){
+    private void turnOff(){
         //Pretend turn off
     }
 

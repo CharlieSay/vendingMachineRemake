@@ -47,8 +47,7 @@ public class BitcoinPayment extends Payment {
             BufferedImage image = ImageIO.read(url);
             return new ImageIcon(image);
         } catch (Exception e) {
-            Logger LOGGER = Logger.getLogger("Log");
-            LOGGER.log(Level.SEVERE,"Something went wrong",e);
+            Logger.getGlobal().log(Level.SEVERE,"Something went wrong",e);
             return null;
         }
     }

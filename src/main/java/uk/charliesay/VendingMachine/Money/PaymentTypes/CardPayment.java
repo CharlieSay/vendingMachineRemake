@@ -4,6 +4,7 @@ import uk.charliesay.VendingMachine.Money.Contactless;
 import uk.charliesay.VendingMachine.Money.Payment;
 
 import java.math.BigDecimal;
+import java.util.logging.Logger;
 
 /*
 To IMPLEMENT
@@ -43,7 +44,7 @@ public class CardPayment extends Payment implements Contactless{
             this.paymentAmount = amountToPay;
             makePayment();
         }else{
-            System.out.println("Something went wrong...\nCouldn't catch type of card payment.");
+            Logger.getGlobal().fine("Something went wrong...\nCouldn't catch type of card payment.");
             cardNumber = null;
             cardPin = null;
             paymentAmount = null;

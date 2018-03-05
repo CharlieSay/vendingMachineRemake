@@ -5,8 +5,10 @@ import uk.charliesay.VendingMachine.Exceptions.InDetachmentException;
 
 public class OledDisplay extends Display implements Detachable {
 
+    /*
+    Foobar here is a FAKE Detachment code, pretending to be some "physical movement"
+     */
     public boolean detachScreen(String inputDetachCode) throws InDetachmentException {
-        //Pretend Case "as if there was some deatchment code";
         String detachCode = "FooBar";
         if (detachCode.equalsIgnoreCase(inputDetachCode)){
                 return true;
