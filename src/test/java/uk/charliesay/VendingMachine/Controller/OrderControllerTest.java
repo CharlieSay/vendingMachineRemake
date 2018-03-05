@@ -10,9 +10,7 @@ import uk.charliesay.VendingMachine.Inventory.Item;
 
 import java.math.BigDecimal;
 
-import static org.junit.Assert.*;
-import static uk.charliesay.VendingMachine.Button.CharacterButton.availableCharacters.A;
-import static uk.charliesay.VendingMachine.Button.CharacterButton.availableCharacters.B;
+import static uk.charliesay.VendingMachine.Button.CharacterButton.availableCharacters.*;
 
 public class OrderControllerTest {
 
@@ -34,32 +32,80 @@ public class OrderControllerTest {
     public void should_ReturnFalse_WhenInvalidButtonCombination(){
         CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.E);
         NumberButton numberButton = new NumberButton(9);
-        boolean shouldBeFalse = orderController.OrderRequest(characterButton,numberButton);
+        boolean shouldBeFalse = orderController.OrderRequest(characterButton,numberButton,"cash");
 
         Assert.assertFalse(shouldBeFalse);
     }
 
     @Test
-    public void should_ReturnFalse_WhenValidButtonCombination_ButNoFunds(){
+    public void should_ReturnFalse_WhenValidButtonCombination_ButNoFunds_CashPayment(){
         CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.A);
         NumberButton numberButton = new NumberButton(1);
         setUpFakeInventory();
 
-        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton);
+        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton,"cash");
 
         Assert.assertFalse(shouldBeTrue);
     }
 
     @Test
-    public void should_ReturnTrue_WhenValidCombination_ButWithFunds(){
+    public void should_ReturnTrue_WhenValidCombination_ButWithFunds_CashPayment(){
         CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.A);
         NumberButton numberButton = new NumberButton(1);
         vendingMachine.getMoneyStore().addToStore(BigDecimal.valueOf(1.50));
         setUpFakeInventory();
 
-        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton);
+        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton,"cash");
 
         Assert.assertTrue(shouldBeTrue);
+    }
+
+    @Test
+    public void should_ReturnTrue_WhenValidCombination_CardContactlessPayment(){
+        CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.A);
+        NumberButton numberButton = new NumberButton(1);
+        vendingMachine.getMoneyStore().addToStore(BigDecimal.valueOf(1.50));
+        setUpFakeInventory();
+
+        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton,"contactless");
+
+        Assert.assertTrue(shouldBeTrue);
+    }
+
+    @Test
+    public void should_ReturnTrue_WhenValidCombination_CardChipPinPayment(){
+        CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.A);
+        NumberButton numberButton = new NumberButton(1);
+        vendingMachine.getMoneyStore().addToStore(BigDecimal.valueOf(1.50));
+        setUpFakeInventory();
+
+        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton,"chip");
+
+        Assert.assertTrue(shouldBeTrue);
+    }
+
+    @Test
+    public void should_ReturnTrue_WhenValidCombination_CardBTCPayment(){
+        CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.A);
+        NumberButton numberButton = new NumberButton(1);
+        vendingMachine.getMoneyStore().addToStore(BigDecimal.valueOf(1.50));
+        setUpFakeInventory();
+
+        boolean shouldBeTrue = orderController.OrderRequest(characterButton,numberButton,"btc");
+
+        Assert.assertTrue(shouldBeTrue);
+    }
+
+    @Test
+    public void should_ReturnFalse_WhenValidCombiniation_ButInvalidPaymentType(){
+        CharacterButton characterButton = new CharacterButton(CharacterButton.availableCharacters.A);
+        NumberButton numberButton = new NumberButton(1);
+        vendingMachine.getMoneyStore().addToStore(BigDecimal.valueOf(1.50));
+        setUpFakeInventory();
+
+        boolean shouldBeFalse = orderController.OrderRequest(characterButton,numberButton,"foobar");
+
+        Assert.assertFalse(shouldBeFalse);
     }
 
     private void setUpFakeInventory(){

@@ -3,6 +3,7 @@ package uk.charliesay.VendingMachine.Controller;
 import uk.charliesay.VendingMachine.Button.CharacterButton;
 import uk.charliesay.VendingMachine.Button.ItemButton;
 import uk.charliesay.VendingMachine.Button.NumberButton;
+import uk.charliesay.VendingMachine.Exceptions.PhysicalException;
 import uk.charliesay.VendingMachine.Inventory.Item;
 import uk.charliesay.VendingMachine.Money.PaymentTypes.BitcoinPayment;
 import uk.charliesay.VendingMachine.Money.PaymentTypes.CardPayment;
@@ -10,6 +11,8 @@ import uk.charliesay.VendingMachine.Money.PaymentTypes.CashPayment;
 import uk.charliesay.VendingMachine.Money.PaymentTypes.PaymentTypes;
 
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class OrderController {
 
@@ -19,55 +22,79 @@ public class OrderController {
         this.vendingMachine = vendingMachine;
     }
 
-    public boolean OrderRequest(CharacterButton characterButton, NumberButton numberButton){
+    public boolean OrderRequest(CharacterButton characterButton, NumberButton numberButton, String paymentNeeded){
         ItemButton itemButton = whichButtonPressed(characterButton,numberButton);
         if (itemButton == null){
-            vendingMachine.getDisplay().outputContent("Item does not exist for some reason");
+            vendingMachine.getDisplay().outputContent("Please try another selection");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Selecton made to missing product : ");
+            sb.append(characterButton.getCharacterValueAsChar());
+            sb.append(numberButton.getButtonID() + "\n");
+            sb.append("With payment type " + paymentNeeded);
+            Logger.getGlobal().log(Level.WARNING,sb.toString());
             return false;
         }else{
             BigDecimal itemPrice = itemButton.getItem().getAbsolutePrice();
-            PaymentTypes paymentTypes = paymentTypeNeeded();
+            PaymentTypes paymentTypes = paymentTypeNeeded(paymentNeeded);
+            if (paymentTypes == null){
+                StringBuilder sb = new StringBuilder();
+                sb.append("Correct CHAR and NUMBER Button however");
+                sb.append("Payment type incorrect " + paymentNeeded);
+                Logger.getGlobal().log(Level.SEVERE,sb.toString());
+                return false;
+            }
             switch (paymentTypes) {
                 case CASH:
                     CashPayment cashPayment = new CashPayment(itemPrice, vendingMachine.getMoneyStore());
                     if (cashPayment.makePayment()){
                         DispenseRequest(itemButton.getItem());
-                        vendingMachine.getDisplay().readInput("Dispensed");
-                        DecreaseItemQuantity();
+                        vendingMachine.getDisplay().outputContent("Dispensed");
+                        DecreaseItemQuantity(itemButton);
                         return true;
                     }else{
-                        vendingMachine.getDisplay().readInput("Not enough Funds");
+                        vendingMachine.getDisplay().outputContent("Not enough Funds");
                         return false;
-                    }
-//                case CARD_CONTACTLESS:
-//                    new CardPayment(CardPayment.cardPaymentType.CONTACTLESS, itemPrice).makePayment();
-//                    break;
-//                case CARD_CHIP_PIN:
-//                    new CardPayment(CardPayment.cardPaymentType.CHIP_PIN, itemPrice).makePayment();
-//                    break;
-//                case BITCOIN:
-//                    new BitcoinPayment(itemPrice).makePayment();
-//                    break;
             }
-            return false;
+                case CARD_CONTACTLESS:
+                    new CardPayment(CardPayment.cardPaymentType.CONTACTLESS, itemPrice).makePayment();
+                    vendingMachine.getDisplay().outputContent("Dispensed");
+                    return true;
+                case CARD_CHIP_PIN:
+                    new CardPayment(CardPayment.cardPaymentType.CHIP_PIN, itemPrice).makePayment();
+                    vendingMachine.getDisplay().outputContent("Dispensed");
+                    return true;
+                case BITCOIN:
+                    new BitcoinPayment(itemPrice).makePayment();
+                    vendingMachine.getDisplay().outputContent("Dispensed");
+                    return true;
+            }
         }
+        return false;
     }
 
     private ItemButton whichButtonPressed(CharacterButton characterButton, NumberButton numberButton){
-        ItemButton itemRequested = vendingMachine.getItemMap().getItemButton(characterButton,numberButton);
-        return itemRequested;
+        return vendingMachine.getItemMap().getItemButton(characterButton,numberButton);
     }
 
-    private PaymentTypes paymentTypeNeeded(){
-        return PaymentTypes.CASH;
+    //This is literally just for SHOWCASE Purposes, this'll obviously work if in a LIVE environment select the right form.
+    private PaymentTypes paymentTypeNeeded(String neededAsString){
+        if (neededAsString.equalsIgnoreCase("cash")) return PaymentTypes.CASH;
+        else if (neededAsString.equalsIgnoreCase("contactless")) return PaymentTypes.CARD_CONTACTLESS;
+        else if (neededAsString.equalsIgnoreCase("chip")) return PaymentTypes.CARD_CHIP_PIN;
+        else if (neededAsString.equalsIgnoreCase("btc")) return PaymentTypes.BITCOIN;
+        else return null;
     }
 
-    public void DispenseRequest(Item item){
-
+    private void DispenseRequest(Item item){
+        try {
+            vendingMachine.getDispenser().dispenseItem(item);
+        } catch (PhysicalException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void DecreaseItemQuantity(){
-
+    private void DecreaseItemQuantity(ItemButton itemButton){
+        vendingMachine.getItemMap().decreaseQuantity(itemButton);
     }
 
 }

@@ -1,6 +1,5 @@
 package uk.charliesay.VendingMachine.Button;
 
-import uk.charliesay.VendingMachine.Controller.VendingMachine;
 import uk.charliesay.VendingMachine.Money.MoneyStore;
 
 public class CancelButton extends Button {
