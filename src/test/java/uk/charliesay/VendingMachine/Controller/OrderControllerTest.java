@@ -6,6 +6,7 @@ import org.junit.Test;
 import uk.charliesay.VendingMachine.Button.CharacterButton;
 import uk.charliesay.VendingMachine.Button.ItemButton;
 import uk.charliesay.VendingMachine.Button.NumberButton;
+import uk.charliesay.VendingMachine.Exceptions.PhysicalException;
 import uk.charliesay.VendingMachine.Inventory.Item;
 
 import java.math.BigDecimal;
@@ -104,6 +105,19 @@ public class OrderControllerTest {
         setUpFakeInventory();
 
         boolean shouldBeFalse = orderController.OrderRequest(characterButton,numberButton,"foobar");
+
+        Assert.assertFalse(shouldBeFalse);
+    }
+
+    @Test
+    public void should_ReturnFalse_IfItemIsNull(){
+        Item nullItem = null;
+        CharacterButton nullCharacterButton = new CharacterButton(C);
+        NumberButton nullNumberButton = new NumberButton(1);
+        ItemButton nullItemButton = new ItemButton(nullCharacterButton, nullNumberButton, nullItem);
+        vendingMachine.getItemMap().addItemToList(nullItemButton,1);
+
+        boolean shouldBeFalse = orderController.OrderRequest(nullCharacterButton,nullNumberButton,null);
 
         Assert.assertFalse(shouldBeFalse);
     }

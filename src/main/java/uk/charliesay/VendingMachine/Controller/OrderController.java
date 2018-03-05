@@ -25,25 +25,19 @@ public class OrderController {
 
     public boolean OrderRequest(CharacterButton characterButton, NumberButton numberButton, String paymentNeeded){
         ItemButton itemButton = whichButtonPressed(characterButton,numberButton);
-        if (itemButton == null){
+        if (itemButton == null || itemButton.getItem() == null){
             vendingMachine.getDisplay().outputContent("Please try another selection");
-            StringBuilder sb = new StringBuilder();
-            sb.append("Selecton made to missing product : ");
-            sb.append(characterButton.getCharacterValueAsChar());
-            sb.append(numberButton.getButtonID() + "\n");
-            sb.append("With payment type " + paymentNeeded);
-            Logger.getGlobal().log(Level.WARNING, "Something went wrong: {0} ", sb.toString());
+            String error = "Selecton made to missing product : " + numberButton.getButtonID()+"\n"+"With Payment Type "+paymentNeeded;
+            Logger.getGlobal().log(Level.WARNING, "Something went wrong: {0} ", error);
             return false;
         }else{
-            BigDecimal itemPrice = itemButton.getItem().getAbsolutePrice();
             PaymentTypes paymentTypes = paymentTypeNeeded(paymentNeeded);
             if (paymentTypes == null){
-                StringBuilder sb = new StringBuilder();
-                sb.append("Correct CHAR and NUMBER Button however ");
-                sb.append("Payment type incorrect " + paymentNeeded);
-                Logger.getGlobal().log(Level.SEVERE, "Something went wrong: {0} ", sb.toString());
+                String error = "Correct CHAR and NUMBER Button however Payment type incorrect " +paymentNeeded;
+                Logger.getGlobal().log(Level.SEVERE, "Something went wrong: {0} ", error);
                 return false;
             }
+            BigDecimal itemPrice = itemButton.getItem().getAbsolutePrice();
             switch (paymentTypes) {
                 case CASH:
                     CashPayment cashPayment = new CashPayment(itemPrice, vendingMachine.getMoneyStore());
