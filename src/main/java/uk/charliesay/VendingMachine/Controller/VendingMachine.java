@@ -1,7 +1,6 @@
 package uk.charliesay.VendingMachine.Controller;
 
 import uk.charliesay.VendingMachine.Business.Dispenser;
-import uk.charliesay.VendingMachine.Display.ConsoleDisplay;
 import uk.charliesay.VendingMachine.Display.Display;
 import uk.charliesay.VendingMachine.Display.LcdDisplay;
 import uk.charliesay.VendingMachine.Inventory.ItemMap;

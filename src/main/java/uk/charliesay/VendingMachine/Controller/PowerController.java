@@ -2,7 +2,7 @@ package uk.charliesay.VendingMachine.Controller;
 
 public class PowerController {
 
-    VendingMachine vendingMachine = new VendingMachine();
+    VendingMachine vendingMachine;
 
     public static void main(String[] args) {
         PowerController powerController = new PowerController();
@@ -12,6 +12,7 @@ public class PowerController {
 
     private void turnOn(){
         //Pretend get config, of display, inventory... etc....
+        vendingMachine = new VendingMachine();
     }
 
     private void turnOff(){
