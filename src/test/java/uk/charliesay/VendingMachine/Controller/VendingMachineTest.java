@@ -1,9 +1,9 @@
-package uk.charliesay.VendingMachine.Business;
+package uk.charliesay.VendingMachine.Controller;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import uk.charliesay.VendingMachine.Controller.VendingMachine;
+import uk.charliesay.VendingMachine.Business.Dispenser;
 import uk.charliesay.VendingMachine.Display.ConsoleDisplay;
 import uk.charliesay.VendingMachine.Display.Display;
 import uk.charliesay.VendingMachine.Inventory.ItemMap;

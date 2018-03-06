@@ -22,7 +22,7 @@ public class CancelButtonTest {
         MoneyStore moneyStore = new MoneyStore();
         moneyStore.addToStore(new BigDecimal(5.00).setScale(2, RoundingMode.CEILING));
 
-        cancelButtonTestObject.refundCash(moneyStore);
+        cancelButtonTestObject.DeleteSelection(moneyStore);
 
         BigDecimal moneyInStoreAfterRemoval = moneyStore.getCurrentAmount();
 
