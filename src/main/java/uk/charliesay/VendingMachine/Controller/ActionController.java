@@ -24,6 +24,7 @@ public class ActionController {
         if (haveBothButtonsBeenPressed()){
             OrderController orderController = new OrderController(vendingMachine);
             orderController.OrderRequest(characterButton,numberButton,"cash");
+            orderClean();
             return true;
         }
         return false;

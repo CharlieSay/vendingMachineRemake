@@ -6,7 +6,7 @@
 
     <groupId>groupId</groupId>
     <artifactId>vendingMachineRemake</artifactId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.5.2-SNAPSHOT</version>
     <properties>
         <sonar.core.codeCoveragePlugin>jacoco</sonar.core.codeCoveragePlugin>
         <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>

@@ -4,14 +4,14 @@ import uk.charliesay.VendingMachine.Button.CharacterButton;
 import uk.charliesay.VendingMachine.Button.ItemButton;
 import uk.charliesay.VendingMachine.Button.NumberButton;
 import uk.charliesay.VendingMachine.Inventory.Item;
+import uk.charliesay.VendingMachine.Inventory.ItemFactory;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class PowerController {
+public class  PowerController {
 
+    private final ItemFactory itemFactory = new ItemFactory();
     VendingMachine vendingMachine;
 
     public static void main(String[] args) {
@@ -19,11 +19,16 @@ public class PowerController {
         powerController.turnOn();
     }
 
+    public PowerController(){
+        this.turnOn();
+    }
+
     /*
     Kicks off whole machine process, populates inventory.
      */
 
-    private void turnOn(){
+    public void turnOn(){
+        Logger.getGlobal().log(Level.INFO," Turning On..");
         vendingMachine = new VendingMachine();
         inventoryPopulation();
         idle();
@@ -33,8 +38,9 @@ public class PowerController {
     Turns off safely
      */
 
-    private void turnOff(){
+    public void turnOff(){
         vendingMachine = null;
+        Logger.getGlobal().log(Level.INFO," Turning Off...");
     }
 
     /*
@@ -66,15 +72,15 @@ public class PowerController {
         NumberButton fizzyWaterNumberButton = new NumberButton(2);
         NumberButton yazooNumberButton = new NumberButton(3);
 
-        Item spriteItem = new Item(BigDecimal.valueOf(1.00).setScale(2, RoundingMode.CEILING),"Sprite");
-        Item drPepperItem = new Item(BigDecimal.valueOf(1.00).setScale(2, RoundingMode.CEILING),"Dr Pepper");
-        Item cokeItem = new Item(BigDecimal.valueOf(1.00).setScale(2, RoundingMode.CEILING),"Coke");
-        Item cokeCherryItem = new Item(BigDecimal.valueOf(1.00).setScale(2, RoundingMode.CEILING),"Coke Cherry");
-        Item fantaItem = new Item(BigDecimal.valueOf(1.00).setScale(2, RoundingMode.CEILING),"Fanta");
-        Item waterItem = new Item(BigDecimal.valueOf(0.50).setScale(2, RoundingMode.CEILING),"Water");
-        Item ribenaItem = new Item(BigDecimal.valueOf(1.20).setScale(2, RoundingMode.CEILING),"Ribena");
-        Item fizzyWaterItem = new Item(BigDecimal.valueOf(0.80).setScale(2, RoundingMode.CEILING),"Fizzy Water");
-        Item yazooItem = new Item(BigDecimal.valueOf(0.80).setScale(2, RoundingMode.CEILING),"Yazoo");
+        Item spriteItem = itemFactory.ItemFactory("Sprite", 1.00);
+        Item drPepperItem = itemFactory.ItemFactory("Dr Pepper", 1.00);
+        Item cokeItem = itemFactory.ItemFactory("Coke", 1.00);
+        Item cokeCherryItem = itemFactory.ItemFactory("Coke Cherry", 1.00);
+        Item fantaItem = itemFactory.ItemFactory("Fanta", 1.00);
+        Item waterItem = itemFactory.ItemFactory("Water", 0.50);
+        Item fizzyWaterItem = itemFactory.ItemFactory("Fizzy Water", 0.80);
+        Item ribenaItem = itemFactory.ItemFactory("Ribena", 1.20);
+        Item yazooItem = itemFactory.ItemFactory("Yazoo", 0.80);
 
         ItemButton spriteItemButton = new ItemButton(spriteCharacterButton,spriteNumberButton,spriteItem);
         ItemButton drPepperItemButton = new ItemButton(drPepperCharacterButton,drPepperNumberButton,drPepperItem);
