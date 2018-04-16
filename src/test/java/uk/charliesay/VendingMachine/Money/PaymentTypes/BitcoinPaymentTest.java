@@ -45,7 +45,7 @@ public class BitcoinPaymentTest {
 
     @Test
     public void should_ConvertToBTC(){
-
+        bitcoinPayment.currentExchangeRate();
     }
 
     @Test

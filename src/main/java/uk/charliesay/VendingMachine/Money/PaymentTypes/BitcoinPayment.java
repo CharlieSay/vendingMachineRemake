@@ -1,14 +1,21 @@
 package uk.charliesay.VendingMachine.Money.PaymentTypes;
 
+import org.json.JSONObject;
 import uk.charliesay.VendingMachine.Money.Payment;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -52,11 +59,31 @@ public class BitcoinPayment extends Payment {
         }
     }
 
+    public JSONObject currentExchangeRate(){
+        try {
+            URL url = new URL("http://api.coindesk.com/v1/bpi/currentprice.json");
+            URLConnection urlConnection = url.openConnection();
+            BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String inputLine;
+            while ((inputLine = in.readLine()) != null){
+                sb.append(inputLine);
+            }
+            in.close();
+            System.out.println(sb.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private void qrCodeDisplay() {
         JLabel label = new JLabel(qrCodeObject());
         JFrame frame = new JFrame();
+        JLabel currentPrice = new JLabel("Current BTC Price : £5438.90");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-        frame.getContentPane().add(label);
+        frame.getContentPane().add(label, BorderLayout.CENTER);
+        frame.getContentPane().add(currentPrice, BorderLayout.NORTH);
         frame.pack();
         frame.setLocation(200, 200);
         frame.setResizable(false);
